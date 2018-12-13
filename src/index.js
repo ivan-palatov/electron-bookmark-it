@@ -11,7 +11,6 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 ipcMain.on('new-item', (e, itemUrl) => {
   // Get item with readItem module
   readItem(itemUrl, item => {
-    console.log(item);
     // Sent to renderer
     e.sender.send('new-item-success', item);
   });

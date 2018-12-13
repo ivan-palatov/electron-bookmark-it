@@ -3,3 +3,15 @@
     color: lightgray;
     font-style: italic;
 }
+
+.panel {
+    padding-top: 52px;
+    margin-bottom: 0 !important;
+}
+
+.panel-heading {
+    position: fixed;
+    width: 100%;
+    margin-top: -52px;
+    z-index: 100;
+}
