@@ -1,10 +1,17 @@
 // Modules
-const { app, BrowserWindow } =  require('electron');
+const { app, BrowserWindow, ipcMain } =  require('electron');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
+
+// Listen for new-item
+ipcMain.on('new-item', (e, itemUrl) => {
+  setTimeout(() => {
+    e.sender.send('new-item-success', 'new item read');
+  }, 2000);
+});
 
 // mainWindow instance
 let win;
