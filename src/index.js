@@ -1,5 +1,6 @@
 // Modules
 const { app, BrowserWindow, ipcMain } =  require('electron');
+const readItem = require('./readItem');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -8,9 +9,12 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 
 // Listen for new-item
 ipcMain.on('new-item', (e, itemUrl) => {
-  setTimeout(() => {
-    e.sender.send('new-item-success', 'new item read');
-  }, 2000);
+  // Get item with readItem module
+  readItem(itemUrl, item => {
+    console.log(item);
+    // Sent to renderer
+    e.sender.send('new-item-success', item);
+  });
 });
 
 // mainWindow instance
