@@ -15,3 +15,12 @@
     margin-top: -52px;
     z-index: 100;
 }
+
+.read-item {
+    border-left-width: 10px;
+    user-select: none;
+}
+
+.read-item.is-active {
+    background-color: #eee !important;
+}
