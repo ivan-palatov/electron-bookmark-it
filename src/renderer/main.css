@@ -24,3 +24,9 @@
 .read-item.is-active {
     background-color: #eee !important;
 }
+
+#loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}

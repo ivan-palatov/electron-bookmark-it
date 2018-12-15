@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>ReadIt</title>
+    <link rel="stylesheet" href="../../node_modules/bulma/css/bulma.min.css">
+    <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./main.css">
+    <style>
+      html, body, webview {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <section id="loader" class="hero is-fullheight has-text-centered">
+      <div class="hero-body">
+        <div class="container">
+
+          <div class="busy">
+            <h1 class="title">
+              <span class="icon is-large">
+                <i class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+              </span>
+            </h1>
+          </div>
+
+          <div class="failed is-hidden">
+            <h1 class="title">Failed to Load</h1>
+            <h2 class="subtitle">Please check your internet connection</h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <webview src="about:blank"></webview>
+
+    <script>
+      const $ = require('jquery');
+      const queryString = require('query-string');
+      // Get url from query string via parsing query string
+      const queryParams = queryString.parse(location.search);
+      const url = decodeURIComponent(queryParams.url);
+      // Load remote content once the webview is ready
+      $('webview').one('dom-ready', e => {
+        // Load item's content url
+        e.currentTarget.loadURL(url);
+      }).one('did-finish-load', () => {
+        // Hide loader to reveal webview
+        $('#loader').fadeOut(100);
+        // Handle failed load
+      }).on('did-fail-load', () => {
+        $('#loader .busy').addClass('is-hidden');
+        $('#loader').fadeIn(100);
+        $('#loader .failed').removeClass('is-hidden');
+      });
+    </script>
+  </body>
+<html>
