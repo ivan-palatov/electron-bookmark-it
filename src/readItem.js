@@ -13,7 +13,8 @@ module.exports = (url, callback) => {
         show: false,
         webPreferences: {
             offscreen: true
-        }
+        },
+        nodeIntegration: false
     });
 
     // Load read item

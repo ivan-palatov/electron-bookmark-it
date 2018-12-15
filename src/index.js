@@ -1,6 +1,7 @@
 // Modules
 const { app, BrowserWindow, ipcMain } =  require('electron');
 const readItem = require('./readItem');
+const openReader = require('./openReader');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -14,6 +15,13 @@ ipcMain.on('new-item', (e, itemUrl) => {
     // Sent to renderer
     e.sender.send('new-item-success', item);
   });
+});
+
+// Listen for open-reader
+ipcMain.on('open-reader', (e, data) => {
+  const { url, title } = data;
+  // Create a new window
+  openReader(url, title);
 });
 
 // mainWindow instance

@@ -1,3 +1,6 @@
+// Modules
+const { ipcRenderer } = require('electron');
+
 // Massive that contains all items
 export const toReadItems = JSON.parse(localStorage.getItem('toReadItems')) || [];
 
@@ -36,8 +39,8 @@ export const openItem = () => {
     // Reader window URL
     let readerWinUrl = `file://${__dirname}/reader.html?url=${contentUrl}`;
     // Open item is a new BrowserWindow
-    let readerWin = window.open(readerWinUrl, targetItem.data('title'));
-
+    // let readerWin = window.open(readerWinUrl, targetItem.data('title'));
+    ipcRenderer.send('open-reader', { url: readerWinUrl, title: targetItem.data('title') });
 }
 
 // Add new items

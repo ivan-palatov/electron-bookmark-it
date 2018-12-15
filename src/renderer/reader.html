@@ -26,10 +26,6 @@
             </h1>
           </div>
 
-          <div class="failed is-hidden">
-            <h1 class="title">Failed to Load</h1>
-            <h2 class="subtitle">Please check your internet connection</h2>
-          </div>
         </div>
       </div>
     </section>
@@ -50,10 +46,6 @@
         // Hide loader to reveal webview
         $('#loader').fadeOut(100);
         // Handle failed load
-      }).on('did-fail-load', () => {
-        $('#loader .busy').addClass('is-hidden');
-        $('#loader').fadeIn(100);
-        $('#loader .failed').removeClass('is-hidden');
       });
     </script>
   </body>
