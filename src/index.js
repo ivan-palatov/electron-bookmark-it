@@ -28,11 +28,12 @@ const createWindow = () => {
       minWidth: 350,
       maxWidth: 650,
       minHeight: 310,
-      show: false
+      show: false,
+      icon: `${__dirname}/src/assets/icons/icon_64x64.png`
   });
 
   // Devtools
-  win.webContents.openDevTools();
+  // win.webContents.openDevTools();
 
   // Load main window content
   win.loadURL(`file://${__dirname}/renderer/main.html`);

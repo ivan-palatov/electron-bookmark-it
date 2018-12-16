@@ -1,69 +1,61 @@
 {
   "name": "book-marking-app",
-  "productName": "book-marking-app",
+  "productName": "ReadIt",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "A simple bookmarking app, the project from Master Electron Course",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "eslint src --color"
+    "publish": "electron-forge publish"
   },
   "keywords": [],
   "author": "ZVER3D",
   "license": "MIT",
   "config": {
     "forge": {
-      "make_targets": {
-        "win32": [
-          "squirrel"
-        ],
-        "darwin": [
-          "zip"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
-        ]
+      "packagerConfig": {
+        "asar": true,
+        "icon": "src/assets/icons/icon"
       },
-      "electronPackagerConfig": {
-        "packageManager": "npm"
-      },
-      "electronWinstallerConfig": {
-        "name": "book_marking_app"
-      },
-      "electronInstallerDebian": {},
-      "electronInstallerRedhat": {},
-      "github_repository": {
-        "owner": "",
-        "name": ""
-      },
-      "windowsStoreConfig": {
-        "packageName": "",
-        "name": "bookmarkingapp"
-      }
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "ReadIt"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
     }
   },
   "dependencies": {
     "bulma": "^0.7.2",
-    "electron-compile": "^6.4.3",
     "electron-squirrel-startup": "^1.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "query-string": "^6.2.0"
   },
   "devDependencies": {
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "electron-forge": "^5.2.3",
-    "electron-prebuilt-compile": "3.0.10",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^15.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.11.1"
+    "@electron-forge/cli": "6.0.0-beta.30",
+    "@electron-forge/maker-deb": "6.0.0-beta.30",
+    "@electron-forge/maker-rpm": "6.0.0-beta.30",
+    "@electron-forge/maker-squirrel": "6.0.0-beta.30",
+    "@electron-forge/maker-zip": "6.0.0-beta.30",
+    "electron": "3.0.12"
   }
 }

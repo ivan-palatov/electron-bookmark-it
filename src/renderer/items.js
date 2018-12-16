@@ -2,21 +2,21 @@
 const { ipcRenderer, shell } = require('electron');
 
 // Massive that contains all items
-export let toReadItems = JSON.parse(localStorage.getItem('toReadItems')) || [];
+module.exports.toReadItems = JSON.parse(localStorage.getItem('toReadItems')) || [];
 
 // Save items to localStorage
-export const saveItems = () => {
-    localStorage.setItem('toReadItems', JSON.stringify(toReadItems));
+module.exports.saveItems = () => {
+    localStorage.setItem('toReadItems', JSON.stringify(this.toReadItems));
 }
 
 // Toggle item as selected
-export const selectItem = e => {
+module.exports.selectItem = e => {
     $('.read-item').removeClass('is-active');
     $(e.currentTarget).addClass('is-active');
 }
 
 // Change current active item
-export const changeItem = direction => {
+module.exports.changeItem = direction => {
     // Get current active item
     let activeItem = $('.read-item.is-active');
     // Get direction and get item accordingly
@@ -29,9 +29,9 @@ export const changeItem = direction => {
 }
 
 // Open items for reading
-export const openItem = () => {
+module.exports.openItem = () => {
     // Only if items have been added
-    if (!toReadItems.length) return;
+    if (!this.toReadItems.length) return;
     // Get selected item
     let targetItem = $('.read-item.is-active');
     // Get item's content URL (encoded)
@@ -45,10 +45,9 @@ export const openItem = () => {
 }
 
 // Add new items
-export const addItem = item => {
+module.exports.addItem = item => {
     // Hide "No Items" message
     $('#no-items').hide();
-
     // New item HTML
     let itemHTML = `
     <a class="panel-block read-item" data-url="${item.url}" data-title="${item.title}">
@@ -64,12 +63,12 @@ export const addItem = item => {
     // Attach select event handler
     $('.read-item')
         .off('click, dblclick')
-        .on('click', selectItem)
-        .on('dblclick', openItem);
+        .on('click', this.selectItem)
+        .on('dblclick', this.openItem);
 }
 
 // Delete item function
-export const deleteItem = (item = false) => {
+module.exports.deleteItem = (item = false) => {
     // If item isnt passed, set it to index of currently selected item
     if (item === false) {
         item = $('.read-item.is-active').index() - 1;
@@ -78,12 +77,12 @@ export const deleteItem = (item = false) => {
     // Remove item from DOM
     $('.read-item').eq(item).remove();
     // Remove from toReadItems array
-    toReadItems = toReadItems.filter((el, i) => i !== Number(item));
+    this.toReadItems = this.toReadItems.filter((el, i) => i !== Number(item));
     // Update local storage
-    saveItems();
+    this.saveItems();
 
     // Select prev item or none if list is empty
-    if (toReadItems.length) {
+    if (this.toReadItems.length) {
         // if first item was deleted, select new first item in the list
         let newItemIndex = (Number(item) === 0) ? 0 : item - 1;
         // Assign active class to a new item
@@ -96,13 +95,14 @@ export const deleteItem = (item = false) => {
 
 // Delete item once it is read
 ipcRenderer.on('mark-read', (e, item) => {
-    deleteItem(item);
+    this.deleteItem(item);
+    // deleteItem(item);
 });
 
 // Open item in default browser
-export const openInBrowser = () => {
+module.exports.openInBrowser = () => {
     // Only if there are items
-    if (!toReadItems.length) return;
+    if (!this.toReadItems.length) return;
 
     // Get selected item
     let targetItem = $('.read-item.is-active');
