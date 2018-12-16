@@ -30,6 +30,16 @@
       </div>
     </section>
 
+    <a id="mark-read" class="is-hidden">
+      <div class="block">
+        <span class="tag is-large is-primary">
+          <span class="icon">
+            <i class="fa fa-check fa-inverse"></i>
+          </span>&nbsp; Read
+        </span>
+      </div>
+    </a>
+
     <webview src="about:blank"></webview>
 
     <script>
@@ -38,6 +48,12 @@
       // Get url from query string via parsing query string
       const queryParams = queryString.parse(location.search);
       const url = decodeURIComponent(queryParams.url);
+
+      const { ipcRenderer } = require('electron');
+
+      // Get item index
+      let itemIndex = queryParams.itemIndex;
+
       // Load remote content once the webview is ready
       $('webview').one('dom-ready', e => {
         // Load item's content url
@@ -45,7 +61,14 @@
       }).one('did-finish-load', () => {
         // Hide loader to reveal webview
         $('#loader').fadeOut(100);
-        // Handle failed load
+        // Show mark read
+        $('#mark-read').removeClass('is-hidden');
+      });
+
+      // Handle mark read click
+      $('#mark-read').click(() => {
+        ipcRenderer.send('mark-read', itemIndex);
+        window.close();
       });
     </script>
   </body>

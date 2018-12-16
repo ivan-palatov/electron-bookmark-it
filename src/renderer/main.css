@@ -30,3 +30,13 @@
     width: 100%;
     height: 100%;
 }
+
+#mark-read {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+#mark-read .tag {
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, .25);
+}

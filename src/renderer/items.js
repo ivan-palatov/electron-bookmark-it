@@ -2,7 +2,7 @@
 const { ipcRenderer } = require('electron');
 
 // Massive that contains all items
-export const toReadItems = JSON.parse(localStorage.getItem('toReadItems')) || [];
+export let toReadItems = JSON.parse(localStorage.getItem('toReadItems')) || [];
 
 // Save items to localStorage
 export const saveItems = () => {
@@ -36,10 +36,11 @@ export const openItem = () => {
     let targetItem = $('.read-item.is-active');
     // Get item's content URL (encoded)
     let contentUrl = encodeURIComponent(targetItem.data('url'));
+    // Get item index to pass to reader window
+    let itemIndex = targetItem.index() - 1;
     // Reader window URL
-    let readerWinUrl = `file://${__dirname}/reader.html?url=${contentUrl}`;
-    // Open item is a new BrowserWindow
-    // let readerWin = window.open(readerWinUrl, targetItem.data('title'));
+    let readerWinUrl = `file://${__dirname}/reader.html?url=${contentUrl}&itemIndex=${itemIndex}`;
+    // Open item in a new BrowserWindow
     ipcRenderer.send('open-reader', { url: readerWinUrl, title: targetItem.data('title') });
 }
 
@@ -66,3 +67,24 @@ export const addItem = item => {
         .on('click', selectItem)
         .on('dblclick', openItem);
 }
+
+// Delete item once it is read
+ipcRenderer.on('mark-read', (e, item) => {
+    // Remove item from DOM
+    $('.read-item').eq(item).remove();
+    // Remove from toReadItems array
+    toReadItems = toReadItems.filter((el, i) => i !== Number(item));
+    // Update local storage
+    saveItems();
+
+    // Select prev item or none if list is empty
+    if (toReadItems.length) {
+        // if first item was deleted, select new first item in the list
+        let newItemIndex = (Number(item) === 0) ? 0 : item - 1;
+        // Assign active class to a new item
+        $('.read-item').eq(newItemIndex).addClass('is-active');
+    } else {
+        // Show no items message
+        $('#no-items').show();
+    }
+});

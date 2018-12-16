@@ -17,13 +17,6 @@ ipcMain.on('new-item', (e, itemUrl) => {
   });
 });
 
-// Listen for open-reader
-ipcMain.on('open-reader', (e, data) => {
-  const { url, title } = data;
-  // Create a new window
-  openReader(url, title);
-});
-
 // mainWindow instance
 let win;
 
@@ -48,6 +41,17 @@ const createWindow = () => {
       win = null;
   });
 }
+
+// Listen for open-reader
+ipcMain.on('open-reader', (e, data) => {
+  const { url, title } = data;
+  // Create a new window
+  openReader(url, title, win);
+});
+// Listen for mark-read event and send it to renderer on main window
+ipcMain.on('mark-read', (e, item) => {
+  win.webContents.send('mark-read', item);
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

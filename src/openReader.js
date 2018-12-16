@@ -3,12 +3,13 @@ const { BrowserWindow } = require('electron');
 
 let readerWin;
 
-module.exports = (url, title) => {
+module.exports = (url, title, win) => {
     readerWin = new BrowserWindow({
         minWidth: 600,
         minHeight: 400,
         title,
-        nodeIntegration: false
+        nodeIntegration: false,
+        parent: win
     });
 
     // Load the page
