@@ -1,5 +1,5 @@
 // Modules
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, shell } = require('electron');
 
 // Massive that contains all items
 export let toReadItems = JSON.parse(localStorage.getItem('toReadItems')) || [];
@@ -68,8 +68,13 @@ export const addItem = item => {
         .on('dblclick', openItem);
 }
 
-// Delete item once it is read
-ipcRenderer.on('mark-read', (e, item) => {
+// Delete item function
+export const deleteItem = (item = false) => {
+    // If item isnt passed, set it to index of currently selected item
+    if (item === false) {
+        item = $('.read-item.is-active').index() - 1;
+    }
+
     // Remove item from DOM
     $('.read-item').eq(item).remove();
     // Remove from toReadItems array
@@ -87,4 +92,19 @@ ipcRenderer.on('mark-read', (e, item) => {
         // Show no items message
         $('#no-items').show();
     }
+}
+
+// Delete item once it is read
+ipcRenderer.on('mark-read', (e, item) => {
+    deleteItem(item);
 });
+
+// Open item in default browser
+export const openInBrowser = () => {
+    // Only if there are items
+    if (!toReadItems.length) return;
+
+    // Get selected item
+    let targetItem = $('.read-item.is-active');
+    shell.openExternal(targetItem.data('url'));
+}

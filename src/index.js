@@ -27,7 +27,8 @@ const createWindow = () => {
       height: 650,
       minWidth: 350,
       maxWidth: 650,
-      minHeight: 310
+      minHeight: 310,
+      show: false
   });
 
   // Devtools
@@ -35,6 +36,11 @@ const createWindow = () => {
 
   // Load main window content
   win.loadURL(`file://${__dirname}/renderer/main.html`);
+
+  // Show app only when its webContent ready
+  win.once('ready-to-show', () => {
+    win.show();
+  });
 
   // Handle window closed event
   win.on('closed', () => {
