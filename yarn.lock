@@ -190,15 +190,16 @@
   optionalDependencies:
     electron-winstaller "^4.0.0"
 
-"@electron-forge/maker-zip@6.0.0-beta.45":
-  version "6.0.0-beta.45"
-  resolved "https://registry.yarnpkg.com/@electron-forge/maker-zip/-/maker-zip-6.0.0-beta.45.tgz#87fd649a89996768f51cec9fa10cc980ecf6ab34"
-  integrity sha512-Y3JbehNInD6t4mV5K9mynQYFwwORILHcq3p5Q/smi0TLuj7PLwSLGiVZYBSNn3U3QkaQXXAHi5roqkgQnHcTaw==
+"@electron-forge/maker-zip@6.0.0-beta.34":
+  version "6.0.0-beta.34"
+  resolved "https://registry.yarnpkg.com/@electron-forge/maker-zip/-/maker-zip-6.0.0-beta.34.tgz#64389bbe6582599168328030725b20c064c7b03a"
+  integrity sha512-kDMVcTsMlRN7tSQJYX3lApt08p63zHfkuIcPHBpV9fEOJABZK5iHhwNvx3U3x+Syp2ABRDEpGksjCvmBkyp5fw==
   dependencies:
-    "@electron-forge/maker-base" "6.0.0-beta.45"
-    "@electron-forge/shared-types" "6.0.0-beta.45"
+    "@electron-forge/maker-base" "6.0.0-beta.34"
+    "@electron-forge/shared-types" "6.0.0-beta.34"
     cross-zip "^2.1.5"
-    fs-extra "^8.1.0"
+    fs-extra "^7.0.0"
+    pify "^4.0.0"
 
 "@electron-forge/plugin-base@6.0.0-beta.45":
   version "6.0.0-beta.45"
@@ -492,10 +493,10 @@ buffer-from@^1.0.0:
   resolved "https://registry.yarnpkg.com/buffer-from/-/buffer-from-1.1.1.tgz#32713bc028f75c02fdb710d7c7bcec1f2c6070ef"
   integrity sha512-MQcXEUbCKtEo7bhqEs6560Hyd4XaovZlO/k9V3hjVUF/zwW7KBVdSK4gIt/bzwS9MbR5qob+F5jusZsb0YQK2A==
 
-bulma@^0.7.2:
-  version "0.7.4"
-  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.4.tgz#7e74512e9118d9799021339e67e365ee0ac4f3f9"
-  integrity sha512-krG2rP6eAX1WE0sf6O0SC/FUVSOBX4m1PBC2+GKLpb2pX0qanaDqcv9U2nu75egFrsHkI0zdWYuk/oGwoszVWg==
+bulma@^0.7.5:
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.7.5.tgz#35066c37f82c088b68f94450be758fc00a967208"
+  integrity sha512-cX98TIn0I6sKba/DhW0FBjtaDpxTelU166pf7ICXpCCuplHWyu6C9LYZmL5PEsnePIeJaiorsTEzzNk3Tsm1hw==
 
 cacheable-request@^6.0.0:
   version "6.1.0"
@@ -979,10 +980,10 @@ electron-winstaller@^4.0.0:
     lodash.template "^4.2.2"
     temp "^0.9.0"
 
-electron@6.0.11:
-  version "6.0.11"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-6.0.11.tgz#64effa71397045779a1ddbf51312a41ccf26f491"
-  integrity sha512-mi1oHmeFIQrg+CDQ6lbugZAloOxuWPm/ecEKYe1230PGlDoWND7SYStiWQ2eI4YXAEOL/NvuY88ogemu1qhdBg==
+electron@4.1.3:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-4.1.3.tgz#d04e4212da6dc0977faa53fc2b8581d58e8e011d"
+  integrity sha512-oOeuA+BAydrMcKGBu4GEJfgAtaRd189SabE8V9koAH/sUiTHYroWtwRzA6V24JFa/dCJAHNjVD8F4qSMybxzrA==
   dependencies:
     "@types/node" "^10.12.18"
     electron-download "^4.1.0"
@@ -2259,7 +2260,7 @@ pify@^2.0.0:
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
   integrity sha1-7RQaasBDqEnqWISY59yosVMw6Qw=
 
-pify@^4.0.1:
+pify@^4.0.0, pify@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
